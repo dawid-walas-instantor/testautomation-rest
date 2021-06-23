@@ -18,7 +18,6 @@ pipeline {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/master']],
-                    //doGenerateSubmoduleConfigurations: false,
                     extensions: [[$class: 'CleanCheckout']],
                     submoduleCfg: [],
                     userRemoteConfigs: [[credentialsId: 'github-credentials', url: 'https://github.com/PJATK-Database-department/testautomation-rest.git']]
@@ -29,7 +28,15 @@ pipeline {
             steps {
 
                 echo 'Building test framework'
-                sh 'mvn clean test'
+                sh 'mvn clean install -Dmaven.test.skip=true'
+                sh 'mvn test'
+            }
+        }
+        stage ('Publish report') {
+            steps {
+
+                echo 'Publishing report'
+                cucumber '**/Cucumber.json'
             }
         }
     }
