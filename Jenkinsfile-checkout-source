@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven361'
+        jdk 'jdk11'
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+        stage('Checkout') {
+        /* W celu pobrania kodu z repozytorium potrzebujemy dostarczyc login i hasło do autoryzacji.
+         *
+         * 'github-credentials' -> nazwa zdefiniowanej autoryzacji, którą można użyć w kodzie (pipeline)
+         *  autoryzację definiujemy w: "Dashboard" > "Manage Jenkins" > "Manage Credentials" > "Jenkins" > "Global credentials" > "Add Credenials"
+         */
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    extensions: [[$class: 'CleanCheckout']],
+                    userRemoteConfigs: [[credentialsId: 'github-credentials', url: 'https://github.com/PJATK-Database-department/testautomation-rest.git']]
+                ])
+            }
+        }
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
+            }
+        }
+    }
+}

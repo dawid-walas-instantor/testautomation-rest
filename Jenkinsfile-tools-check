@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven361' // nazwa skonfigurowana w "Dashboard" > "Manage Jenkins" > "Global Appication Tools" > "Maven"
+                         // polecenie: "mvn --version" wskaze sciezke do mavena
+        jdk 'jdk11'  // nazwa skonfigurowana w "Dashboard" > "Manage Jenkins" > "Global Appication Tools" > "Java"
+                     // polecenie: jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));'
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
+            }
+        }
+    }
+}
