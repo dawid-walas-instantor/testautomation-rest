@@ -1,6 +1,4 @@
-package com.company.rest;
-
-import java.util.ArrayList;
+package com.company.rest.dtos;
 
 public class User {
     private int id;
@@ -107,4 +105,18 @@ public class User {
         return phone.equals(user.phone);
     }
 
+    @Override
+    public String toString() {
+
+       return "Object: '" + this.getClass() + "', \n" +
+               "Id: '" + this.id + "', \n" +
+               "UserStatus: '" + this.userStatus + "', \n" +
+               "Username: '" + this.username + "', \n" +
+               "Firstname: '" + this.firstName + "', \n" +
+               "Lastname: '" + this.lastName + "', \n" +
+               "Email: '" + this.email + "', \n" +
+               "Phone: '" + this.phone + "', \n" +
+               "Password: '" + this.password + "'"
+               ;
+    }
 }

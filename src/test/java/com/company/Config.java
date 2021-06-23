@@ -25,6 +25,6 @@ public class Config {
             }
         }
 
-        DriverSingleton.getInstance().quit();
+        //DriverSingleton.getInstance().quit();
     }
 }
