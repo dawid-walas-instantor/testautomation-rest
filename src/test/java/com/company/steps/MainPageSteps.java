@@ -42,11 +42,13 @@ public class MainPageSteps {
     @Then("The user should login successfully and is brought to the inventory page")
     public void theUserShouldLoginSuccessfullyAndIsBroughtToTheInventoryPage() {
         assertTrue(inventoryPage.browserIsOnThePage());
+    //    DriverSingleton.getInstance().quit();
     }
 
     @Then("The user should not login successfully and is still on login page")
     public void theUserShouldNotLoginSuccessfullyAndIsStillOnLoginPage() {
         assertEquals("Epic sadface: Username and password do not match any user in this service", mainPage.getErrorText());
+    //    DriverSingleton.getInstance().quit();
     }
 
     @After
@@ -78,6 +80,5 @@ public class MainPageSteps {
             }
         }
 
-        DriverSingleton.getInstance().quit();
     }
 }
